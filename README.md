@@ -40,8 +40,8 @@ livraria-livros/
 ├── database/           # Bruno
 │   ├── scripts/
 │   │   ├── create_tables.sql
-│   │   └── seed_data.sql
-│   └── diagrama-er.png
+│       └── seed_data.sql
+│   
 ├── files/               # Bruno
 │   ├── uploads/
 │   └── docs/
