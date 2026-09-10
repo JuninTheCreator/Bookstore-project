@@ -1,5 +1,0 @@
-mkdir -p frontend backend database/scripts files/uploads files/docs
-echo "# Livraria - Gerenciamento de Livros" > README.md
-git add .
-git commit -m "estrutura inicial do projeto"
-git push origin main
