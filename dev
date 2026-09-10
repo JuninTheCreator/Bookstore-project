@@ -1,8 +1,0 @@
-git checkout -b dev
-git push origin dev
-
-git checkout -b murilo-frontend-backend
-git push origin murilo-frontend-backend
-
-git checkout -b bruno-database-files
-git push origin bruno-database-files
