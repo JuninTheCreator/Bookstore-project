@@ -1,11 +1,13 @@
-const API_URL = 'http://localhost:3000/api/livros';
+// IMPORTANTE: ajuste essa URL conforme onde você colocou a pasta "backend"
+// dentro do htdocs do XAMPP. Exemplo: se a pasta do projeto está em
+// C:\xampp\htdocs\livraria-livros, a URL fica assim:
+const API_URL = 'http://localhost/livraria-livros/backend/api/livros.php';
 
 const form = document.getElementById('form-livro');
 const tabelaCorpo = document.getElementById('tabela-corpo');
 const btnCancelar = document.getElementById('btn-cancelar');
 const formTitulo = document.getElementById('form-titulo');
 
-// Carrega a lista de livros ao abrir a página
 document.addEventListener('DOMContentLoaded', carregarLivros);
 
 async function carregarLivros() {
@@ -15,7 +17,7 @@ async function carregarLivros() {
     renderizarTabela(livros);
   } catch (erro) {
     console.error('Erro ao carregar livros:', erro);
-    alert('Não foi possível carregar os livros. Verifique se o backend está rodando.');
+    alert('Não foi possível carregar os livros. Verifique se o Apache/MySQL do XAMPP estão ligados e se a API_URL está correta.');
   }
 }
 
@@ -47,12 +49,11 @@ form.addEventListener('submit', async (evento) => {
     preco: document.getElementById('preco').value,
     quantidade_estoque: document.getElementById('quantidade').value,
     // autor_id e categoria_id ficam de fora neste exemplo simples
-    // (o ideal é ter selects carregando autores/categorias do banco)
   };
 
   try {
     if (id) {
-      await fetch(`${API_URL}/${id}`, {
+      await fetch(`${API_URL}?id=${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados),
@@ -78,7 +79,7 @@ form.addEventListener('submit', async (evento) => {
 
 async function editarLivro(id) {
   try {
-    const resposta = await fetch(`${API_URL}/${id}`);
+    const resposta = await fetch(`${API_URL}?id=${id}`);
     const livro = await resposta.json();
 
     document.getElementById('livro-id').value = livro.id;
@@ -98,7 +99,7 @@ async function excluirLivro(id) {
   if (!confirm('Tem certeza que deseja excluir este livro?')) return;
 
   try {
-    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
     carregarLivros();
   } catch (erro) {
     console.error('Erro ao excluir livro:', erro);
